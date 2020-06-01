@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.view.View
 
 class MainActivity : AppCompatActivity() {
+    private val mDuration = 1000L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ac_main)
@@ -21,11 +23,9 @@ class MainActivity : AppCompatActivity() {
         onAnimatorSet(view)
     }
 
-    private val duration = 1000L
-
     fun onValueAnimator(view: View) {
         ValueAnimator.ofFloat(1f, 3f, 1f).apply {
-            this.duration = duration
+            duration = mDuration
             addUpdateListener {
                 view.scaleX = it.animatedValue as Float
                 view.scaleY = it.animatedValue as Float
@@ -38,8 +38,8 @@ class MainActivity : AppCompatActivity() {
     fun onObjectAnimator(view: View) {
         val oaScaleX = ObjectAnimator.ofFloat(view, View.SCALE_X, 1f, 3f, 1f)
         val oaScaleY = ObjectAnimator.ofFloat(view, View.SCALE_Y, 1f, 3f, 1f)
-        oaScaleX.duration = duration
-        oaScaleY.duration = duration
+        oaScaleX.duration = mDuration
+        oaScaleY.duration = mDuration
 
         oaScaleX.repeatCount = 1
         oaScaleY.repeatCount = 1
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         val pvhY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 3f, 1f)
 
         ObjectAnimator.ofPropertyValuesHolder(view, pvhX, pvhY).apply {
-            this.duration = duration
+            duration = mDuration
             repeatCount = 1
             start()
         }
@@ -65,9 +65,9 @@ class MainActivity : AppCompatActivity() {
         val oaScaleY = ObjectAnimator.ofFloat(view, View.SCALE_Y, 0f, 2f)
         val oaTranslationX = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, 0f, 100f, -100f, 0f)
 
-        oaScaleX.duration = duration
-        oaScaleY.duration = duration
-        oaTranslationX.duration = duration
+        oaScaleX.duration = mDuration
+        oaScaleY.duration = mDuration
+        oaTranslationX.duration = mDuration
 
         AnimatorSet().apply {
             play(oaScaleX).with(oaScaleY).before(oaTranslationX)

@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity() {
 //        onValueAnimator(view)
 //        onObjectAnimator(view)
 //        onPropertyValueHolder(view)
-        onAnimatorSet(view)
+//        onAnimatorSet(view)
+//        view.animate().translationX(100f).scaleX(3f).start()
     }
 
     fun onValueAnimator(view: View) {
@@ -73,6 +74,5 @@ class MainActivity : AppCompatActivity() {
             play(oaScaleX).with(oaScaleY).before(oaTranslationX)
             start()
         }
-
     }
 }

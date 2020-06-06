@@ -42,9 +42,11 @@ internal class SampleAdapter(context: Context?) :
     }
 
     fun removeLastItem(){
-        val index = mDataset.size-1
-        mDataset.removeAt(index)
-        notifyItemRemoved(index)
+        if (mDataset.size > 0){
+            val index = mDataset.size - 1
+            mDataset.removeAt(index)
+            notifyItemRemoved(index)
+        }
     }
 
     override fun onCreateViewHolder(

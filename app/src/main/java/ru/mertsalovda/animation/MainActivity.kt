@@ -26,10 +26,6 @@ class MainActivity : AppCompatActivity(), SampleAdapter.Callback {
             adapter = mAdapter
             itemAnimator = mAnimator
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
         val recMoveAnimator = ObjectAnimator.ofFloat(recycler, View.TRANSLATION_X, -500f, 0f)
         val recAlphaAnimator = ObjectAnimator.ofFloat(recycler, View.ALPHA, 0f, 1f)
 

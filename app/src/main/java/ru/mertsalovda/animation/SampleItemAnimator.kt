@@ -52,8 +52,8 @@ class SampleItemAnimator : DefaultItemAnimator() {
         val moveTextAnim = AnimatorSet()
         moveTextAnim.playSequentially(moveAway, moveComeBlack)
 
-        val oldTextAlpha = ObjectAnimator.ofFloat(view, "alpha", 0.8f, 0f)
-        val newTextAlpha = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f)
+        val oldTextAlpha = ObjectAnimator.ofFloat(view, View.ALPHA, 0.8f, 0f)
+        val newTextAlpha = ObjectAnimator.ofFloat(view, View.ALPHA, 0f, 1f)
         oldTextAlpha.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator?) {
                 view.text = preAlphaTextInfo.text
@@ -77,6 +77,8 @@ class SampleItemAnimator : DefaultItemAnimator() {
         }
         return super.animateChange(oldHolder, newHolder, preInfo, postInfo)
     }
+
+
 
     private class TextInfo : ItemHolderInfo() {
         lateinit var text: String

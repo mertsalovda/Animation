@@ -1,5 +1,7 @@
 package ru.mertsalovda.animation
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +23,18 @@ class MainActivity : AppCompatActivity(), SampleAdapter.Callback {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = mAdapter
             itemAnimator = mAnimator
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val recMoveAnimator = ObjectAnimator.ofFloat(recycler, View.TRANSLATION_X, -500f, 0f)
+        val recAlphaAnimator = ObjectAnimator.ofFloat(recycler, View.ALPHA, 0f, 1f)
+
+        AnimatorSet().apply {
+            duration = 1000L
+            playTogether(recMoveAnimator, recAlphaAnimator)
+            start()
         }
 
     }

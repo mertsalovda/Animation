@@ -4,7 +4,6 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import androidx.core.animation.addListener
@@ -44,33 +43,33 @@ class SampleItemAnimator : DefaultItemAnimator() {
         postInfo: ItemHolderInfo
     ): Boolean {
         val holder = newHolder as SampleViewHolder
-        val preColorTextInfo = preInfo as TextInfo
-        val postColorTextInfo = postInfo as TextInfo
+        val preAlphaTextInfo = preInfo as TextInfo
+        val postAlphaTextInfo = postInfo as TextInfo
         val view = holder.itemView as TextView
-        val moveAway =
-            ObjectAnimator.ofFloat(view, View.TRANSLATION_X, 0f, 400f)
-        val moveComeBlack =
-            ObjectAnimator.ofFloat(view, View.TRANSLATION_X, -400f, 0f)
-        val bgAnim = AnimatorSet()
-        bgAnim.playSequentially(moveAway, moveComeBlack)
-        val oldTextRotate = ObjectAnimator.ofFloat(view, "alpha", 0.8f, 0f)
-        val newTextRotate = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f)
-        oldTextRotate.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
-                view.text = preColorTextInfo.text
+
+        val moveAway = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, 0f, 400f)
+        val moveComeBlack = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, -400f, 0f)
+        val moveTextAnim = AnimatorSet()
+        moveTextAnim.playSequentially(moveAway, moveComeBlack)
+
+        val oldTextAlpha = ObjectAnimator.ofFloat(view, "alpha", 0.8f, 0f)
+        val newTextAlpha = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f)
+        oldTextAlpha.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator?) {
+                view.text = preAlphaTextInfo.text
             }
 
-            override fun onAnimationStart(animation: Animator?) {
-                view.text = postColorTextInfo.text
+            override fun onAnimationEnd(animation: Animator?) {
+                view.text = postAlphaTextInfo.text
             }
         })
 
-        val textAnim = AnimatorSet()
-        textAnim.playSequentially(oldTextRotate, newTextRotate)
+        val alphaTextAnim = AnimatorSet()
+        alphaTextAnim.playSequentially(oldTextAlpha, newTextAlpha)
         val overallAnim = AnimatorSet()
         overallAnim.apply {
             duration = 1000L
-            playTogether(bgAnim, textAnim)
+            playTogether(moveTextAnim, alphaTextAnim)
             addListener {
                 dispatchAnimationFinished(newHolder)
             }

@@ -7,6 +7,9 @@ import android.animation.ObjectAnimator
 import android.view.View
 import android.widget.TextView
 import androidx.core.animation.addListener
+import androidx.dynamicanimation.animation.FloatPropertyCompat
+import androidx.dynamicanimation.animation.SpringAnimation
+import androidx.dynamicanimation.animation.SpringForce
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -75,10 +78,32 @@ class SampleItemAnimator : DefaultItemAnimator() {
             }
             start()
         }
+
         return super.animateChange(oldHolder, newHolder, preInfo, postInfo)
     }
 
+    override fun animateAdd(holder: ViewHolder?): Boolean {
+        val textView = (holder as SampleViewHolder).itemView as TextView
 
+        val transitionY =
+            SpringAnimation(textView, object : FloatPropertyCompat<View>("translationY") {
+                override fun setValue(view: View?, value: Float) {
+                    view!!.translationY = value
+                }
+
+                override fun getValue(view: View?): Float {
+                    return view!!.translationY
+                }
+            })
+        val springForceY = SpringForce(0f).apply {
+            stiffness = SpringForce.STIFFNESS_MEDIUM
+            dampingRatio = SpringForce.DAMPING_RATIO_HIGH_BOUNCY
+        }
+        transitionY.spring = springForceY
+        textView.y += 200f
+        transitionY.start()
+        return super.animateAdd(holder)
+    }
 
     private class TextInfo : ItemHolderInfo() {
         lateinit var text: String

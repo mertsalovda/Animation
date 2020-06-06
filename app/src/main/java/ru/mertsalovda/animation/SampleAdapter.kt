@@ -35,6 +35,18 @@ internal class SampleAdapter(context: Context?) :
         notifyItemChanged(position)
     }
 
+    fun add(){
+        val number: Int = Random().nextInt(100)
+        mDataset.add("Item $number")
+        notifyItemInserted(mDataset.size-1)
+    }
+
+    fun removeLastItem(){
+        val index = mDataset.size-1
+        mDataset.removeAt(index)
+        notifyItemRemoved(index)
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

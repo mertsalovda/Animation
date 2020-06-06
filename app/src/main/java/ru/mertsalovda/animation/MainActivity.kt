@@ -3,6 +3,8 @@ package ru.mertsalovda.animation
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,7 +38,25 @@ class MainActivity : AppCompatActivity(), SampleAdapter.Callback {
             playTogether(recMoveAnimator, recAlphaAnimator)
             start()
         }
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.addItem -> {
+                mAdapter.add()
+                return true
+            }
+            R.id.removeItem -> {
+                mAdapter.removeLastItem()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
     }
 
     override fun onItemClick(view: View) {

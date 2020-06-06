@@ -7,9 +7,7 @@ import android.animation.ObjectAnimator
 import android.view.View
 import android.widget.TextView
 import androidx.core.animation.addListener
-import androidx.dynamicanimation.animation.FloatPropertyCompat
-import androidx.dynamicanimation.animation.SpringAnimation
-import androidx.dynamicanimation.animation.SpringForce
+import androidx.dynamicanimation.animation.*
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -103,6 +101,17 @@ class SampleItemAnimator : DefaultItemAnimator() {
         textView.y += 200f
         transitionY.start()
         return super.animateAdd(holder)
+    }
+
+    override fun animateRemove(holder: ViewHolder?): Boolean {
+        val textView = (holder as SampleViewHolder).itemView as TextView
+        val flingY = FlingAnimation(textView, DynamicAnimation.TRANSLATION_Y)
+        flingY.setStartVelocity(5000f)
+            .setMinValue(0f)
+            .setMaxValue(textView.translationY + 500)
+            .setFriction(1.1f)
+            .start()
+        return super.animateRemove(holder)
     }
 
     private class TextInfo : ItemHolderInfo() {

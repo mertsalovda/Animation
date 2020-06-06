@@ -47,14 +47,14 @@ class SampleItemAnimator : DefaultItemAnimator() {
         val preColorTextInfo = preInfo as TextInfo
         val postColorTextInfo = postInfo as TextInfo
         val view = holder.itemView as TextView
-        val fadeToBlack =
-            ObjectAnimator.ofArgb(view, "backgroundColor", Color.TRANSPARENT, Color.GRAY)
-        val fadeFromBlack =
-            ObjectAnimator.ofArgb(view, "backgroundColor", Color.GRAY, Color.TRANSPARENT)
+        val moveAway =
+            ObjectAnimator.ofFloat(view, View.TRANSLATION_X, 0f, 400f)
+        val moveComeBlack =
+            ObjectAnimator.ofFloat(view, View.TRANSLATION_X, -400f, 0f)
         val bgAnim = AnimatorSet()
-        bgAnim.playSequentially(fadeToBlack, fadeFromBlack)
-        val oldTextRotate = ObjectAnimator.ofFloat(view, View.ROTATION_X, 0f, 90f)
-        val newTextRotate = ObjectAnimator.ofFloat(view, View.ROTATION_X, -90f, 0f)
+        bgAnim.playSequentially(moveAway, moveComeBlack)
+        val oldTextRotate = ObjectAnimator.ofFloat(view, "alpha", 0.8f, 0f)
+        val newTextRotate = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f)
         oldTextRotate.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
                 view.text = preColorTextInfo.text
@@ -69,6 +69,7 @@ class SampleItemAnimator : DefaultItemAnimator() {
         textAnim.playSequentially(oldTextRotate, newTextRotate)
         val overallAnim = AnimatorSet()
         overallAnim.apply {
+            duration = 1000L
             playTogether(bgAnim, textAnim)
             addListener {
                 dispatchAnimationFinished(newHolder)

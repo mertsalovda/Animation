@@ -1,5 +1,6 @@
 package ru.mertsalovda.animation
 
+import android.animation.AnimatorSet
 import android.graphics.drawable.Animatable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +12,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ac_main)
 
-        imageView.setOnClickListener {
-            (imageView.drawable as Animatable).start()
+        val shrug = shrugAndroid.drawable as Animatable
+        val blinking = blinkingAndroid.drawable as Animatable
+
+        shrugAndroid.setOnClickListener {
+            shrug.start()
+        }
+        blinkingAndroid.setOnClickListener {
+            blinking.start()
         }
     }
 }

@@ -7,7 +7,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "ru.mertsalovda.animation"
+        applicationId "ru.mertsalovda.shrug_animation"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1

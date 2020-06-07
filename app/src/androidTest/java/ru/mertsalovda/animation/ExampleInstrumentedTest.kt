@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("ru.mertsalovda.animation", appContext.packageName)
+        assertEquals("ru.mertsalovda.shrug_animation", appContext.packageName)
     }
 }

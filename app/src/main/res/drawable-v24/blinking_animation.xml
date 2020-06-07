@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:drawable="@drawable/android"
+    tools:ignore="UnusedResources">
+    <target
+        android:name="left_eye"
+        android:animation="@animator/blinking" />
+
+    <target
+        android:name="right_eye"
+        android:animation="@animator/blinking" />
+</animated-vector>

@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <Button
         android:id="@+id/animatedObject"
         android:layout_width="wrap_content"
+        android:onClick="onClick"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:text="Another Text"
-        android:textSize="16sp" />
+        android:layout_gravity="top|end"
+        android:text="@string/start"/>
 </FrameLayout>

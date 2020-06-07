@@ -1,7 +1,5 @@
 package ru.mertsalovda.animation
 
-import android.animation.AnimatorSet
-import android.graphics.drawable.Animatable
 import android.graphics.drawable.Animatable2
 import android.graphics.drawable.Drawable
 import android.os.Bundle
